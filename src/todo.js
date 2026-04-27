@@ -1,5 +1,5 @@
 const todos = [];
-const project = createProject('Default');
+const project = createProject('All');
 
 export function createTodo(title, description, dueDate, priority) {
         const todo = {

@@ -153,3 +153,81 @@ body {
     opacity: 0.7;
     transform: scale(1.1);
 }
+
+#todo-modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#todo-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 25px;
+    width: 350px;
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#todo-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#todo-form input,
+#todo-form select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Inter', sans-serif;
+    transition: 0.2s ease;
+}
+
+#todo-form input:focus,
+#todo-form select:focus {
+    outline: none;
+    border-color: var(--blue-color);
+    box-shadow: 0 0 0 2px rgba(24, 143, 167, 0.2);
+}
+
+#todo-check {
+    width: 20px;
+    cursor: pointer;
+}
+
+#modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+#modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+#submit-btn {
+    background-color: var(--blue-color);
+    color: white;
+}
+
+#submit-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+#cancel-btn {
+    background-color: #e0e0e0;
+}
+
+#cancel-btn:hover {
+    opacity: 0.8;
+}
