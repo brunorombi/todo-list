@@ -1,4 +1,4 @@
-import { createTodo } from './todo.js';
+import { createTodo, getTodos } from './todo.js';
 
 export function createModal() {
     const modal = document.createElement('dialog');
@@ -134,4 +134,22 @@ function buildTodo(todo) {
     todoContainer.append(todoInfo, todoProps);
 
     todosContainer.append(todoContainer);
+}
+
+function initApp() {
+    const projectList = document.querySelector('projects-list');
+}
+
+export function updateProjects() {
+    const projects = getTodos();
+    const projectsList = document.querySelector('.projects-list');
+
+    projects.forEach(project => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+
+        a.textContent = project.title;
+        li.append(a);
+        projectsList.append(li);
+    });
 }
