@@ -1,4 +1,155 @@
-body {
-    background-color: #123d;
+:root {
+    --blue-color: #188FA7;
+    --main-color: #f5f5f5;
+    --black-color: #000000;
+    --side-color: #3d5a80;
+    --todo-color: #edf6f9;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100dvh;
+}   
+
+#container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100dvh;
+}
+
+.sidebar {
+    min-width: 300px;
+    background-color: var(--side-color);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 40px 20px;
+}
+
+.sidebar > a {
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-left: 10px;
+}
+
+.projects-container > h1 {
+    color: var(--main-color);
+}
+
+.projects-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.25rem;
+}
+
+.projects-list li{
+    cursor: pointer;
+}
+
+.projects-list li:hover {
+    transition: 0.3s ease;
+    opacity: 0.7;
+    color: #f5f5f5;
+}
+
+.add-project {
+    align-self: center;
+}
+
+.add-project:hover {
+    transition: 0.1s ease;
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--main-color);
+    padding: 20px;
+    gap: 30px;
+}
+
+.todos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    gap: 20px;
+}
+
+.todo {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--todo-color);
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+.todo:hover {
+    transition: 0.1s ease;
+    opacity: 0.8;
+    transform: scale(1.01);
+}
+
+.todo-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-info input {
+    cursor: pointer;
+    width: 25px;
+}
+
+.todo-props {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.priority {
+    background-color: #ef233c;
+    padding: 4px 8px;
+    border-radius: 12px;
+    color: var(--main-color);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.add-btn {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    font-size: 30px;
+    border-radius: 12px;
+    border: none;
+    color: var(--blue-color);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    transition: 0.1s ease;
+    opacity: 0.7;
+    transform: scale(1.1);
+}

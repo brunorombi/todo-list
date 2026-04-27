@@ -1,6 +1,5 @@
 const todos = [];
 const project = createProject('Default');
-todos.push(project);
 
 export function createTodo(title, description, dueDate, priority) {
         const todo = {
@@ -8,7 +7,8 @@ export function createTodo(title, description, dueDate, priority) {
                 title,
                 description,
                 dueDate,
-                priority
+                priority,
+                check: false
         }
         project.todos.push(todo);
         return todo;
@@ -32,14 +32,14 @@ export function pushTodo(todo, id){
         })
 }
 
-export function printTodos() {
-        console.log(todos);
+export function getTodos() {
+        return todos;
 }
 
-export const deleteTodo = function(todo, project) {
+export const deleteTodo = function(id) {
         todos.forEach(el => {
                 el.todos.forEach((element, index) => {
-                        if(element === todo)
+                        if(element.id === id)
                         el.todos.splice(index, 1);
                 });
         });
