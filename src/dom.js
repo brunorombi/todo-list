@@ -1,9 +1,9 @@
-import { createTodo, getTodos, createProject, pushTodo } from './todo.js';
+import { createTodo, getTodos, createProject, pushTodo, updateTodo } from './todo.js';
 let currentProject = getTodos()[0];
 
 createProject('Study');
 
-export function createModal() {
+function createModal(todoDom) {
     const modal = document.createElement('dialog');
     modal.id = "todo-modal";
 
@@ -59,6 +59,13 @@ export function createModal() {
     cancelBtn.textContent = "Cancel";
     cancelBtn.type = "button";
 
+    if(todoDom) {
+        titleInput.value = todoDom.querySelector('.title').textContent;
+        descriptionInput.value = todoDom.querySelector('.description').textContent;
+        dueDateInput.value = todoDom.querySelector('.dueDate').textContent;
+        priorityInput.value = todoDom.querySelector('.priority').textContent;
+    }
+
     cancelBtn.addEventListener('click', () => {
         modal.close();
     });
@@ -66,15 +73,26 @@ export function createModal() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const todo = createTodo(
-            titleInput.value,
-            descriptionInput.value,
-            dueDateInput.value,
-            priorityInput.value
-        );
-        if (currentProject.id !== getTodos()[0].id) 
-            pushTodo(todo, currentProject);
-        renderTodos(buildTodo(todo));
+        if (todoDom) {
+            updateTodo(
+                todoDom.dataset.id, 
+                titleInput.value,
+                descriptionInput.value,
+                dueDateInput.value,
+                priorityInput.value
+            );
+        } else {
+            const todo = createTodo(
+                titleInput.value,
+                descriptionInput.value,
+                dueDateInput.value,
+                priorityInput.value
+            );
+            if (currentProject.id !== getTodos()[0].id) 
+                pushTodo(todo, currentProject);
+            buildTodo(todo);
+        }
+        renderTodos();
 
         modal.close();
     });
@@ -95,11 +113,14 @@ export function createModal() {
     modal.showModal();
 }
 
-export function buildTodo(todo) {
+function buildTodo(todo) {
 
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo');
     todoContainer.dataset.id = todo.id;
+    todoContainer.addEventListener('click', function() {
+        createModal(todoContainer);
+    });
 
     const todoInfo = document.createElement('div');
     todoInfo.classList.add('todo-info');
@@ -150,7 +171,7 @@ export function initApp() {
     });
 }
 
-export function renderProjects() {
+function renderProjects() {
     const projects = getTodos();
     const projectsList = document.querySelector('.projects-list');
     
@@ -171,7 +192,7 @@ export function renderProjects() {
     });
 }
 
-export function renderTodos() {
+function renderTodos() {
     document.querySelector('.current-project').textContent = currentProject.title;
     const todos = document.querySelector('.todos');
     todos.textContent = '';
@@ -184,3 +205,13 @@ export function renderTodos() {
     }
     todos.textContent = "You don't have any projects yet";
 }
+
+// export function updateTodoDom() {
+//     const todosDom = document.querySelectorAll('.todo');
+//         todosDom.forEach(todoDom, () => {
+//             todoDom.addEventListener('click', function() {
+                
+//                 console.log('funcionando')
+//             })
+//         })
+// }
