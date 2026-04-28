@@ -1,5 +1,5 @@
 const todos = [];
-const project = createProject('All');
+const All = createProject('All');
 
 export function createTodo(title, description, dueDate, priority) {
         const todo = {
@@ -10,7 +10,7 @@ export function createTodo(title, description, dueDate, priority) {
                 priority,
                 check: false
         }
-        project.todos.push(todo);
+        All.todos.push(todo);
         return todo;
 }     
 
@@ -24,12 +24,8 @@ export function createProject(title) {
         return project;    
 }
 
-export function pushTodo(todo, id){
-        todos.forEach(project => {
-                if(project.id.includes(id)) {
-                        project.todos.push(todo);
-                }
-        })
+export function pushTodo(todo, project){
+        project.todos.push(todo);
 }
 
 export function getTodos() {

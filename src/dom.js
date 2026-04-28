@@ -1,4 +1,4 @@
-import { createTodo, getTodos, createProject } from './todo.js';
+import { createTodo, getTodos, createProject, pushTodo } from './todo.js';
 let currentProject = getTodos()[0];
 
 createProject('Study');
@@ -73,6 +73,7 @@ export function createModal() {
             priorityInput.value
         );
         
+        pushTodo(todo, currentProject);
         renderTodos(buildTodo(todo));
 
         modal.close();
