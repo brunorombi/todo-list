@@ -1,233 +1,263 @@
 :root {
-    --blue-color: #188FA7;
-    --main-color: #f5f5f5;
-    --black-color: #000000;
-    --side-color: #3d5a80;
-    --todo-color: #edf6f9;
+  --blue-color: #188fa7;
+  --main-color: #f5f5f5;
+  --black-color: #000000;
+  --side-color: #3d5a80;
+  --todo-color: #edf6f9;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    min-height: 100dvh;
-}   
+  font-family: "Inter", sans-serif;
+  min-height: 100dvh;
+}
 
 #container {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100dvh;
 }
 
 .sidebar {
-    min-width: 300px;
-    background-color: var(--side-color);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 40px 20px;
+  min-width: 300px;
+  background-color: var(--side-color);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 40px 20px;
 }
 
 .sidebar > a {
-    color: var(--main-color);
-    cursor: pointer;
+  color: var(--main-color);
+  cursor: pointer;
 }
 
 .projects-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-left: 10px;
 }
 
 .projects-container > h1 {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .projects-list {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 1.25rem;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.25rem;
 }
 
-.projects-list li{
-    cursor: pointer;
+.projects-list li {
+  cursor: pointer;
+  color: var(--todo-color);
 }
 
 .projects-list li:hover {
-    transition: 0.3s ease;
-    opacity: 0.7;
-    color: #f5f5f5;
+  transition: 0.1s ease;
+  opacity: 0.7;
+  transform: scale(0.99);
+}
+
+.add-project-container {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .add-project {
-    align-self: center;
+  color: var(--todo-color);
+  cursor: pointer;
+}
+
+.add-project-form {
+  margin-bottom: 10px;
+}
+
+.add-project-input {
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  background-color: transparent;
+  color: var(--todo-color);
+}
+
+.check-form {
+  background-color: var(--todo-color);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 .add-project:hover {
-    transition: 0.1s ease;
-    opacity: 0.7;
-    transform: scale(1.1);
+  transition: 0.1s ease;
+  opacity: 0.7;
+  transform: scale(1.1);
 }
 
 .todo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--main-color);
-    padding: 20px;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--main-color);
+  padding: 20px;
+  gap: 30px;
 }
 
 .todos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
-    width: 100%;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
+  width: 100%;
+  gap: 20px;
 }
 
 .todo {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: var(--todo-color);
-    border-radius: 8px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: var(--todo-color);
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
 }
 
 .todo:hover {
-    transition: 0.1s ease;
-    opacity: 0.8;
-    transform: scale(1.01);
+  transition: 0.1s ease;
+  opacity: 0.8;
+  transform: scale(1.01);
 }
 
 .todo-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .todo-info input {
-    cursor: pointer;
-    width: 25px;
+  cursor: pointer;
+  width: 25px;
 }
 
 .todo-props {
-    display: flex;
-    align-self: flex-end;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  gap: 12px;
 }
 
 .priority {
-    background-color: #ef233c;
-    padding: 4px 8px;
-    border-radius: 12px;
-    color: var(--main-color);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #ef233c;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: var(--main-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .add-btn {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 40px;
-    right: 40px;
-    font-size: 30px;
-    border-radius: 12px;
-    border: none;
-    color: var(--blue-color);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    cursor: pointer;
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  font-size: 30px;
+  border-radius: 12px;
+  border: none;
+  color: var(--blue-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
 }
 
 .add-btn:hover {
-    transition: 0.1s ease;
-    opacity: 0.7;
-    transform: scale(1.1);
+  transition: 0.1s ease;
+  opacity: 0.7;
+  transform: scale(1.1);
 }
 
 #todo-modal::backdrop {
-    background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #todo-modal {
-    border: none;
-    border-radius: 12px;
-    padding: 25px;
-    width: 350px;
-    background-color: var(--main-color);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 12px;
+  padding: 25px;
+  width: 350px;
+  background-color: var(--main-color);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #todo-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 #todo-form input,
 #todo-form select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-family: 'Inter', sans-serif;
-    transition: 0.2s ease;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: "Inter", sans-serif;
+  transition: 0.2s ease;
 }
 
 #todo-form input:focus,
 #todo-form select:focus {
-    outline: none;
-    border-color: var(--blue-color);
-    box-shadow: 0 0 0 2px rgba(24, 143, 167, 0.2);
+  outline: none;
+  border-color: var(--blue-color);
+  box-shadow: 0 0 0 2px rgba(24, 143, 167, 0.2);
 }
 
 #todo-check {
-    width: 20px;
-    cursor: pointer;
+  width: 20px;
+  cursor: pointer;
 }
 
 #modal-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 #modal-buttons button {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.2s ease;
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease;
 }
 
 #submit-btn {
-    background-color: var(--blue-color);
-    color: white;
+  background-color: var(--blue-color);
+  color: white;
 }
 
 #submit-btn:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 #cancel-btn {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 #cancel-btn:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }

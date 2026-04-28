@@ -114,7 +114,6 @@ function createModal(todoDom) {
 }
 
 function buildTodo(todo) {
-
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo');
     todoContainer.dataset.id = todo.id;
@@ -160,7 +159,6 @@ function buildTodo(todo) {
     return todoContainer;
 }
 
-//Corrigir
 export function initApp() {
     renderProjects();
     renderTodos();
@@ -169,6 +167,9 @@ export function initApp() {
         addTodoBtn.addEventListener('click', (e) => {
             createModal();
     });
+
+    const addProjectBtn = document.querySelector('.add-project');
+    addProjectBtn.addEventListener('click', createProjectForm);
 }
 
 function renderProjects() {
@@ -179,7 +180,6 @@ function renderProjects() {
 
     projects.forEach(project => {
         const li = document.createElement('li');
-
 
         li.dataset.id = project.id;
         li.textContent = project.title;
@@ -206,12 +206,46 @@ function renderTodos() {
     todos.textContent = "You don't have any projects yet";
 }
 
-// export function updateTodoDom() {
-//     const todosDom = document.querySelectorAll('.todo');
-//         todosDom.forEach(todoDom, () => {
-//             todoDom.addEventListener('click', function() {
-                
-//                 console.log('funcionando')
-//             })
-//         })
-// }
+function createProjectForm() {
+    if (document.querySelector('.add-project-form')) return;
+    const formContainer = document.querySelector('.form-container');
+
+    const form = document.createElement('form');
+    form.classList.add('add-project-form');
+    form.style.display = 'block';
+
+    const input = document.createElement('input');
+    input.classList.add('add-project-input');
+    input.type = 'text';
+    input.required = true;
+    input.placeholder = 'Project name...';
+    
+    const btn = document.createElement('button');
+    btn.classList.add('check-form')
+    btn.type = 'submit';
+    
+    const i = document.createElement('i');
+    i.classList.add('fa', 'fa-check');
+    i.ariaHidden = true;
+    
+    btn.append(i);
+    form.append(input, btn);
+    formContainer.append(form);
+
+    input.focus()
+
+    document.addEventListener('keydown', function(event) {
+        if(event.key === 'Escape') {
+            input.value = '';
+            form.remove();
+        }
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        createProject(input.value);
+        form.remove();
+        renderProjects();
+    });
+    input.value = '';
+}
