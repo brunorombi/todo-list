@@ -1,4 +1,7 @@
-import { createTodo, getTodos } from './todo.js';
+import { createTodo, getTodos, createProject } from './todo.js';
+let currentProject = getTodos()[0];
+
+createProject('Study');
 
 export function createModal() {
     const modal = document.createElement('dialog');
@@ -70,7 +73,7 @@ export function createModal() {
             priorityInput.value
         );
         
-        buildTodo(todo);
+        renderTodos(buildTodo(todo));
 
         modal.close();
     });
@@ -92,7 +95,6 @@ export function createModal() {
 }
 
 export function buildTodo(todo) {
-    const todosContainer = document.querySelector(".todos");
 
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo');
@@ -133,19 +135,17 @@ export function buildTodo(todo) {
     todoProps.append(priority, dueDate);
 
     todoContainer.append(todoInfo, todoProps);
-
-    todosContainer.append(todoContainer);
+    return todoContainer;
 }
-
 
 //Corrigir
 export function initApp() {
     renderProjects();
-    renderTodos(getTodos()[0]);
+    renderTodos();
 
     const addTodoBtn = document.querySelector('.add-btn');
         addTodoBtn.addEventListener('click', (e) => {
-        createModal();
+            createModal();
     });
 }
 
@@ -157,28 +157,29 @@ export function renderProjects() {
 
     projects.forEach(project => {
         const li = document.createElement('li');
-        const a = document.createElement('a');
 
-        a.dataset.id = project.id;
-        a.textContent = project.title;
 
-        a.addEventListener('click', () => {
-            renderTodos(project); 
+        li.dataset.id = project.id;
+        li.textContent = project.title;
+        li.addEventListener('click', () => {
+            currentProject = project;
+            renderTodos(); 
         });
 
-        li.append(a);
         projectsList.append(li);
     });
 }
 
-export function renderTodos(project) {
-    document.querySelector('.current-project').textContent = project.title;
+export function renderTodos() {
+    document.querySelector('.current-project').textContent = currentProject.title;
     const todos = document.querySelector('.todos');
     todos.textContent = '';
-    if (project.todos.length) {
-        project.todos.forEach(todo => buildTodo(todo));
+    if (currentProject.todos.length) {
+        currentProject.todos.forEach(todo => {
+           const todoDiv = buildTodo(todo);
+           todos.append(todoDiv);
+        })
         return;
     }
-
     todos.textContent = "You don't have any projects yet";
 }
