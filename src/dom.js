@@ -91,8 +91,9 @@ export function createModal() {
     modal.showModal();
 }
 
-function buildTodo(todo) {
+export function buildTodo(todo) {
     const todosContainer = document.querySelector(".todos");
+
     const todoContainer = document.createElement('div');
     todoContainer.classList.add('todo');
     todoContainer.dataset.id = todo.id;
@@ -136,20 +137,48 @@ function buildTodo(todo) {
     todosContainer.append(todoContainer);
 }
 
-function initApp() {
-    const projectList = document.querySelector('projects-list');
+
+//Corrigir
+export function initApp() {
+    renderProjects();
+    renderTodos(getTodos()[0]);
+
+    const addTodoBtn = document.querySelector('.add-btn');
+        addTodoBtn.addEventListener('click', (e) => {
+        createModal();
+    });
 }
 
-export function updateProjects() {
+export function renderProjects() {
     const projects = getTodos();
     const projectsList = document.querySelector('.projects-list');
+    
+    projectsList.innerHTML = '';
 
     projects.forEach(project => {
         const li = document.createElement('li');
         const a = document.createElement('a');
 
+        a.dataset.id = project.id;
         a.textContent = project.title;
+
+        a.addEventListener('click', () => {
+            renderTodos(project); 
+        });
+
         li.append(a);
         projectsList.append(li);
     });
+}
+
+export function renderTodos(project) {
+    document.querySelector('.current-project').textContent = project.title;
+    const todos = document.querySelector('.todos');
+    todos.textContent = '';
+    if (project.todos.length) {
+        project.todos.forEach(todo => buildTodo(todo));
+        return;
+    }
+
+    todos.textContent = "You don't have any projects yet";
 }

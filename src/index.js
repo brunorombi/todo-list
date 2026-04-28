@@ -1,10 +1,7 @@
 import "./style.css";
 import { createTodo, createProject, pushTodo, getTodos, deleteTodo } from './todo.js'
-import { createModal, updateProjects } from "./dom.js";
+import { createModal, initApp, buildTodo, renderProjects } from "./dom.js";
 
-const addTodoBtn = document.querySelector('.add-btn');
-addTodoBtn.addEventListener('click', (e) => {
-    createModal();
-});
+initApp()
 
-updateProjects();
+// initApp
