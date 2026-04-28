@@ -72,8 +72,8 @@ export function createModal() {
             dueDateInput.value,
             priorityInput.value
         );
-        
-        pushTodo(todo, currentProject);
+        if (currentProject.id !== getTodos()[0].id) 
+            pushTodo(todo, currentProject);
         renderTodos(buildTodo(todo));
 
         modal.close();
