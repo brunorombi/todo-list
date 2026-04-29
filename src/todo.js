@@ -33,12 +33,9 @@ export function getTodos() {
 }
 
 export const deleteTodo = function(id) {
-        todos.forEach(el => {
-                el.todos.forEach((element, index) => {
-                        if(element.id === id)
-                        el.todos.splice(index, 1);
-                });
-        });
+        const index = getTodos()[0].todos
+                .findIndex((todo) => todo.id === id);
+        getTodos()[0].todos.splice(index, 1);
 }
 
 export function updateTodo(id, title, description, dueDate, priority) {

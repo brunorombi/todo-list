@@ -1,7 +1,6 @@
-import { createTodo, getTodos, createProject, pushTodo, updateTodo } from './todo.js';
-let currentProject = getTodos()[0];
+import { createTodo, getTodos, createProject, pushTodo, updateTodo, deleteTodo } from './todo.js';
 
-createProject('Study');
+let currentProject = getTodos()[0];
 
 function createModal(todoDom) {
     const modal = document.createElement('dialog');
@@ -153,9 +152,16 @@ function buildTodo(todo) {
     dueDate.classList.add('dueDate');
     dueDate.textContent = todo.dueDate;
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+
+    const i = document.createElement('i');
+    i.classList.add('fa', 'fa-trash');
+    deleteBtn.append(i);
+
     todoProps.append(priority, dueDate);
 
-    todoContainer.append(todoInfo, todoProps);
+    todoContainer.append(todoInfo, todoProps, deleteBtn);
     return todoContainer;
 }
 
