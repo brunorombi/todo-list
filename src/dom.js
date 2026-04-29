@@ -162,6 +162,11 @@ function buildTodo(todo) {
     todoProps.append(priority, dueDate);
 
     todoContainer.append(todoInfo, todoProps, deleteBtn);
+    deleteBtn.addEventListener('click', function(e) {
+        deleteTodo(todo.id);
+        renderTodos();
+        console.log(currentProject);
+    });
     return todoContainer;
 }
 

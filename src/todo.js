@@ -33,9 +33,9 @@ export function getTodos() {
 }
 
 export const deleteTodo = function(id) {
-        const index = getTodos()[0].todos
-                .findIndex((todo) => todo.id === id);
-        getTodos()[0].todos.splice(index, 1);
+        getTodos().forEach(project => {
+                project.todos = project.todos.filter(todo => todo.id !== id);
+        });
 }
 
 export function updateTodo(id, title, description, dueDate, priority) {
