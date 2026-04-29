@@ -163,9 +163,9 @@ function buildTodo(todo) {
 
     todoContainer.append(todoInfo, todoProps, deleteBtn);
     deleteBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
         deleteTodo(todo.id);
         renderTodos();
-        console.log(currentProject);
     });
     return todoContainer;
 }
