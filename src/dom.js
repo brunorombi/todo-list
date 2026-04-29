@@ -126,6 +126,12 @@ function buildTodo(todo) {
     const checkboxContainer = document.createElement('div');
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
+
+    checkBox.addEventListener('click', function(e) {
+    e.stopPropagation();
+    deleteTodo(todo.id);
+    renderTodos();
+    });
     checkboxContainer.appendChild(checkBox);
 
     const info = document.createElement('div');
@@ -147,6 +153,7 @@ function buildTodo(todo) {
     const priority = document.createElement('p');
     priority.classList.add('priority');
     priority.textContent = todo.priority;
+    priority.dataset.priority = todo.priority;
 
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
