@@ -20,7 +20,7 @@ function createModal(todoDom) {
     descriptionInput.id = "todo-description";
     descriptionInput.type = "text";
     descriptionInput.placeholder = "Description";
-    descriptionInput.required = true;
+    // descriptionInput.required = true;
 
     const dueDateInput = document.createElement('input');
     dueDateInput.id = "todo-date";
