@@ -1,4 +1,4 @@
-import { createTodo, getTodos, createProject, pushTodo, updateTodo, deleteTodo } from './todo.js';
+import { createTodo, getTodos, createProject, pushTodo, updateTodo, deleteTodo, deleteProject } from './todo.js';
 
 let currentProject = getTodos()[0];
 
@@ -198,13 +198,30 @@ function renderProjects() {
 
     projects.forEach(project => {
         const li = document.createElement('li');
-
         li.dataset.id = project.id;
         li.textContent = project.title;
         li.addEventListener('click', () => {
             currentProject = project;
             renderTodos(); 
         });
+
+        if(project !== getTodos()[0]) {
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+    
+            const i = document.createElement('i');
+            i.classList.add('fa', 'fa-trash');
+            deleteBtn.append(i);
+    
+            deleteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                deleteProject(project);
+                currentProject = getTodos()[0];
+                renderProjects();
+                renderTodos();
+            });
+            li.append(deleteBtn);
+        }
 
         projectsList.append(li);
     });
@@ -261,8 +278,9 @@ function createProjectForm() {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        createProject(input.value);
+        currentProject = createProject(input.value);
         form.remove();
+        renderTodos();
         renderProjects();
     });
     input.value = '';

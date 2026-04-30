@@ -49,6 +49,18 @@ export function updateTodo(id, title, description, dueDate, priority) {
                 todo.priority = priority;
         }
 }
+
+export function deleteProject(project) {
+        project.todos.forEach(todo => {
+                deleteTodo(todo.id);
+        });
+
+        const todos = getTodos()
+        const index = todos.findIndex(el => el === project);
+        todos.splice(index, 1);
+
+        console.log(getTodos());
+}
  
 
 
