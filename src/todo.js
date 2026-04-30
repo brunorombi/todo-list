@@ -1,3 +1,5 @@
+import { format, compareAsc } from "date-fns";
+
 const todos = [];
 const All = createProject('All');
 
@@ -11,6 +13,7 @@ export function createTodo(title, description, dueDate, priority) {
                 check: false
         }
         All.todos.push(todo);
+        sortProjectTodos(All);
         return todo;
 }     
 
@@ -26,6 +29,7 @@ export function createProject(title) {
 
 export function pushTodo(todo, project){
         project.todos.push(todo);
+        sortProjectTodos(project);
 }
 
 export function getTodos() {
@@ -48,6 +52,7 @@ export function updateTodo(id, title, description, dueDate, priority) {
                 todo.dueDate = dueDate;
                 todo.priority = priority;
         }
+        sortProjectTodos(getTodos()[0]);
 }
 
 export function deleteProject(project) {
@@ -62,6 +67,8 @@ export function deleteProject(project) {
         console.log(getTodos());
 }
  
-
+function sortProjectTodos(project) {
+    project.todos.sort((a, b) => compareAsc(a.dueDate, b.dueDate));
+}
 
  
