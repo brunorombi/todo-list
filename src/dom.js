@@ -1,4 +1,5 @@
 import { createTodo, getTodos, createProject, pushTodo, updateTodo, deleteTodo, deleteProject } from './todo.js';
+import{ format, compareASC } from "date-fns";
 
 let currentProject = getTodos()[0];
 
@@ -26,6 +27,7 @@ function createModal(todoDom) {
     dueDateInput.id = "todo-date";
     dueDateInput.type = "date";
     dueDateInput.required = true;
+    dueDateInput.valueAsDate = new Date();
 
     const priorityInput = document.createElement('select');
     priorityInput.id = "todo-priority";
@@ -157,7 +159,7 @@ function buildTodo(todo) {
 
     const dueDate = document.createElement('p');
     dueDate.classList.add('dueDate');
-    dueDate.textContent = todo.dueDate;
+    dueDate.textContent = format(todo.dueDate, "dd/MM/yyyy");
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete-btn');
