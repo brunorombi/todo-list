@@ -1,4 +1,4 @@
-import { createTodo, getTodos, createProject, pushTodo, updateTodo, deleteTodo, deleteProject } from './todo.js';
+import { createTodo, getTodos, createProject, pushTodo, deleteTodo, deleteProject, Project, Todo } from './todo.js';
 import{ format } from "date-fns";
 
 let currentProject = getTodos()[0];
@@ -75,8 +75,9 @@ function createModal(todoDom) {
         e.preventDefault();
 
         if (todoDom) {
-            updateTodo(
-                todoDom.dataset.id, 
+            const index = getTodos()[0].todos.findIndex(todo => todoDom.dataset.id === todo.id);
+            const todo = getTodos()[0].todos[index];
+            todo.updateTodo(
                 titleInput.value,
                 descriptionInput.value,
                 new Date(dueDateInput.value),
@@ -89,6 +90,7 @@ function createModal(todoDom) {
                 new Date(dueDateInput.value),
                 priorityInput.value
             );
+            console.log(todo)
             if (currentProject.id !== getTodos()[0].id) 
                 pushTodo(todo, currentProject);
             buildTodo(todo);
