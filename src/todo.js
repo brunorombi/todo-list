@@ -1,7 +1,9 @@
 import { format, compareAsc } from "date-fns";
 
-const todos = [];
-const All = createProject('All');
+const todos = JSON.parse(localStorage.getItem("projects")) || [];
+if (!todos[0]) {
+        todos[0] = createProject(`All`);
+}
 
 export function createTodo(title, description, dueDate, priority) {
         const todo = {
@@ -12,8 +14,10 @@ export function createTodo(title, description, dueDate, priority) {
                 priority,
                 check: false
         }
-        All.todos.push(todo);
-        sortProjectTodos(All);
+
+        getTodos()[0].todos.push(todo);
+        getTodos().forEach(project => sortProjectTodos(project));
+        localStorage.setItem('projects', JSON.stringify(todos));
         return todo;
 }     
 
@@ -24,12 +28,14 @@ export function createProject(title) {
                 todos: []
         }
         todos.push(project);
+        localStorage.setItem('projects', JSON.stringify(todos));
         return project;    
 }
 
 export function pushTodo(todo, project){
         project.todos.push(todo);
         sortProjectTodos(project);
+        localStorage.setItem('projects', JSON.stringify(todos));
 }
 
 export function getTodos() {
@@ -40,6 +46,7 @@ export const deleteTodo = function(id) {
         getTodos().forEach(project => {
                 project.todos = project.todos.filter(todo => todo.id !== id);
         });
+        localStorage.setItem('projects', JSON.stringify(todos));
 }
 
 export function updateTodo(id, title, description, dueDate, priority) {
@@ -51,7 +58,8 @@ export function updateTodo(id, title, description, dueDate, priority) {
         todo.dueDate = dueDate;
         todo.priority = priority;
 
-        getTodos().forEach(project => sortProjectTodos(project)); 
+        getTodos().forEach(project => sortProjectTodos(project));
+        localStorage.setItem('projects', JSON.stringify(todos)); 
 }
 
 export function deleteProject(project) {
@@ -63,11 +71,14 @@ export function deleteProject(project) {
         const index = todos.findIndex(el => el === project);
         todos.splice(index, 1);
 
-        console.log(getTodos());
+        localStorage.setItem('projects', JSON.stringify(todos));
 }
  
 function sortProjectTodos(project) {
     project.todos.sort((a, b) => compareAsc(a.dueDate, b.dueDate));
+    localStorage.setItem('projects', JSON.stringify(todos));
 }
+
+
 
  
