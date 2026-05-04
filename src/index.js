@@ -5,4 +5,5 @@ import { createModal, initApp, buildTodo, renderProjects} from "./dom.js";
 import{ format, compareAsc } from "date-fns";
 initApp();
 
+console.log(new Date);
 // initApp

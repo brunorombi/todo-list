@@ -6,15 +6,17 @@ if (!todos[0]) {
 }
 
 export function createTodo(title, description, dueDate, priority) {
-        const todo = {
-                id: crypto.randomUUID(),
-                title,
-                description,
-                dueDate,
-                priority,
-                check: false
+        class Todo {
+                constructor(title, description, dueDate, priority) {
+                        this.id = crypto.randomUUID(),
+                        this.title = title,
+                        this.description = description,
+                        this.dueDate = dueDate,
+                        this.priority = priority,
+                        this.check = false
+                }
         }
-
+        const todo = new Todo(title, description, dueDate, priority);
         getTodos()[0].todos.push(todo);
         getTodos().forEach(project => sortProjectTodos(project));
         localStorage.setItem('projects', JSON.stringify(todos));
@@ -22,11 +24,15 @@ export function createTodo(title, description, dueDate, priority) {
 }     
 
 export function createProject(title) {
-        const project = {
-                id: crypto.randomUUID(),
-                title,
-                todos: []
+        class Project {
+                constructor(title){
+                        this.id = crypto.randomUUID(),
+                        this.title = title,
+                        this.todos = []
+                }
         }
+
+        const project = new Project(title);
         todos.push(project);
         localStorage.setItem('projects', JSON.stringify(todos));
         return project;    
