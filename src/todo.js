@@ -43,16 +43,15 @@ export const deleteTodo = function(id) {
 }
 
 export function updateTodo(id, title, description, dueDate, priority) {
-        const index = getTodos()[0].todos
-                .findIndex((todo) => todo.id === id);
-        if (index >= 0) {
-                const todo = getTodos()[0].todos[index];
-                todo.title = title;
-                todo.description = description;
-                todo.dueDate = dueDate;
-                todo.priority = priority;
-        }
-        sortProjectTodos(getTodos()[0]);
+        const index = getTodos()[0].todos.findIndex((todo) => todo.id === id);
+
+        const todo = getTodos()[0].todos[index];
+        todo.title = title;
+        todo.description = description;
+        todo.dueDate = dueDate;
+        todo.priority = priority;
+
+        getTodos().forEach(project => sortProjectTodos(project)); 
 }
 
 export function deleteProject(project) {
