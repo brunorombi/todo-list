@@ -18,11 +18,14 @@ class Todo {
 }
 
 const todos = JSON.parse(localStorage.getItem("projects")) || [];
+
 if (!todos[0]) {
   todos[0] = createProject(`All`);
 } else {
   todos.forEach((project) => {
-    project.todos.forEach((todo) => (todo.updateTodo = updateTodo));
+    project.todos.forEach((todo) => {
+        todo.updateTodo = updateTodo;
+    })
   });
 }
 
@@ -60,13 +63,21 @@ export const deleteTodo = function (id) {
 };
 
 function updateTodo(title, description, dueDate, priority) {
-  this.title = title;
-  this.description = description;
-  this.dueDate = dueDate;
-  this.priority = priority;
+  const id = this.id;
 
-  getTodos().forEach((project) => sortProjectTodos(project));
-  localStorage.setItem("projects", JSON.stringify(todos));
+  getTodos().forEach(project => {
+    project.todos.forEach(todo => {
+      if (todo.id === id) {
+        todo.title = title;
+        todo.description = description;
+        todo.dueDate = dueDate;
+        todo.priority = priority;
+      }
+    });
+  });
+
+  getTodos().forEach(project => sortProjectTodos(project));
+  localStorage.setItem('projects', JSON.stringify(todos));
 }
 
 export function deleteProject(project) {

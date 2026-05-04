@@ -96,7 +96,6 @@ function createModal(todoDom) {
             buildTodo(todo);
         }
         renderTodos();
-
         modal.close();
     });
 
@@ -132,9 +131,9 @@ function buildTodo(todo) {
     checkBox.type = 'checkbox';
 
     checkBox.addEventListener('click', function(e) {
-    e.stopPropagation();
-    deleteTodo(todo.id);
-    renderTodos();
+        e.stopPropagation();
+        deleteTodo(todo.id);
+        renderTodos();
     });
     checkboxContainer.appendChild(checkBox);
 
@@ -206,6 +205,7 @@ function renderProjects() {
         li.textContent = project.title;
         li.addEventListener('click', () => {
             currentProject = project;
+            console.log('projeto atual', currentProject);
             renderTodos(); 
         });
 
@@ -230,7 +230,7 @@ function renderProjects() {
         projectsList.append(li);
     });
 }
-
+// Renderizar todos
 function renderTodos() {
     document.querySelector('.current-project').textContent = currentProject.title;
     const todos = document.querySelector('.todos');
