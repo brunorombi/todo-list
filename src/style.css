@@ -68,6 +68,7 @@ p {
 }
 
 .projects-list li {
+  position: relative;
   cursor: pointer;
   color: var(--todo-color);
   padding: 8px 10px;
@@ -146,6 +147,7 @@ p {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   transition: 0.2s ease;
   cursor: pointer;
+  position: relative;
 }
 
 .todo:hover {
@@ -174,8 +176,21 @@ p {
 .delete-btn {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 10px;  
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
   cursor: pointer;
+}
+
+.todo:hover .delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.projects-list li:hover .delete-btn {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .priority {
