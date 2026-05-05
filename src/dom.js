@@ -69,10 +69,12 @@ function createModal(todoDom) {
   cancelBtn.type = "button";
 
   if (todoDom) {
-    titleInput.value = todoDom.querySelector(".title").textContent;
-    descriptionInput.value = todoDom.querySelector(".description").textContent;
-    dueDateInput.value = todoDom.querySelector(".dueDate").textContent;
-    priorityInput.value = todoDom.querySelector(".priority").textContent;
+    const todo = currentProject.todos.find((t) => t.id === todoDom.dataset.id);
+
+    titleInput.value = todo.title;
+    descriptionInput.value = todo.description;
+    dueDateInput.valueAsDate = new Date(todo.dueDate);
+    priorityInput.value = todo.priority;
   }
 
   cancelBtn.addEventListener("click", () => {
@@ -215,34 +217,36 @@ function renderProjects() {
     const span = document.createElement("span");
     span.textContent = project.title;
 
-    span.addEventListener("dblclick", () => {
-      const input = document.createElement("input");
-      input.type = "text";
-      input.value = project.title;
+    if (project !== getTodos()[0]) {
+      span.addEventListener("dblclick", () => {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = project.title;
 
-      li.replaceChild(input, span);
-      input.focus();
+        li.replaceChild(input, span);
+        input.focus();
 
-      function save() {
-        input.removeEventListener("blur", save);
+        function save() {
+          input.removeEventListener("blur", save);
 
-        if (input.value.trim() !== "") {
-          updateProject(project.id, input.value);
-          span.textContent = input.value;
+          if (input.value.trim() !== "") {
+            updateProject(project.id, input.value);
+            span.textContent = input.value;
+          }
+
+          if (li.contains(input)) {
+            li.replaceChild(span, input);
+          }
+          console.log(getTodos());
         }
 
-        if (li.contains(input)) {
-          li.replaceChild(span, input);
-        }
-        console.log(getTodos());
-      }
-
-      input.addEventListener("blur", save);
-      input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") save();
-        if (e.key === "Escape") li.replaceChild(span, input);
+        input.addEventListener("blur", save);
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") save();
+          if (e.key === "Escape") li.replaceChild(span, input);
+        });
       });
-    });
+    }
 
     li.appendChild(span);
     li.addEventListener("click", () => {
@@ -272,7 +276,7 @@ function renderProjects() {
     projectsList.append(li);
   });
 }
-// Renderizar todos
+
 function renderTodos() {
   document.querySelector(".current-project").textContent = currentProject.title;
   const todos = document.querySelector(".todos");
