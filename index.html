@@ -1,11 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-<script defer src="main.js"></script></head>
-<body>
-    
-</body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+  <script defer src="main.js"></script></head>
+  <body>
+    <main id="container">
+      <div class="sidebar">
+        <div class="projects-container">
+          <h1>TODO LIST</h1>
+          <ul class="projects-list"></ul>
+        </div>
+        <div class="add-project-container">
+          <div class="form-container"></div>
+          <a class="add-project">+ New Project</a>
+        </div>
+      </div>
+      <div class="todo-container">
+        <h1 class="current-project"></h1>
+        <div class="todos"></div>
+        <button class="add-btn">+</button>
+      </div>
+    </main>
+  </body>
 </html>
