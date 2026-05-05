@@ -96,3 +96,12 @@ function sortProjectTodos(project) {
   project.todos.sort((a, b) => compareAsc(a.dueDate, b.dueDate));
   localStorage.setItem("projects", JSON.stringify(todos));
 }
+
+export function updateProject(id, newTitle) {
+  const project = getTodos().find(p => p.id === id);
+
+  if(project) {
+    project.title = newTitle;
+    localStorage.setItem("projects", JSON.stringify(todos));
+  }
+}
